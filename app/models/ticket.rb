@@ -1,4 +1,5 @@
 class Ticket < ApplicationRecord
   belongs_to :event
-  has_and_belongs_to_many :orders
+  has_many :order_tickets
+  has_many :orders, through: :order_tickets
 end

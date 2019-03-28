@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_28_031646) do
+ActiveRecord::Schema.define(version: 2019_03_28_034616) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -22,17 +22,22 @@ ActiveRecord::Schema.define(version: 2019_03_28_031646) do
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
+  create_table "order_tickets", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "ticket_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_tickets_on_order_id"
+    t.index ["ticket_id"], name: "index_order_tickets_on_ticket_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
     t.float "total_paid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
-  end
-
-  create_table "orders_tickets", id: false, force: :cascade do |t|
-    t.integer "order_id", null: false
-    t.integer "ticket_id", null: false
   end
 
   create_table "tickets", force: :cascade do |t|
